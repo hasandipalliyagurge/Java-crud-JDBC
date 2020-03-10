@@ -1,0 +1,24 @@
+ADD, Create, Update and Delete operations can be done with prepared statements also. 
+as an exaple Add can be done as follows.
+
+
+
+ String SQL = "Insert into Customer Values(?,?,?,?)";
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/ThogaKade", "root", "");
+            PreparedStatement stm = connection.prepareStatement(SQL);
+            stm.setObject(1, idText.getText());
+            stm.setObject(2, nameText.getText());
+            stm.setObject(3, addressText.getText());
+            stm.setObject(4, salaryText.getText());
+            int res = stm.executeUpdate();
+            if (res > 0) {
+                JOptionPane.showMessageDialog(this, "Added Success");
+            }
+        } catch (ClassNotFoundException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        }
+    }           
